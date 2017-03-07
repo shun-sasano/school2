@@ -1,0 +1,57 @@
+<%= form_for(post) do |f| %>
+  <% if post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+      <% post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :schooltype, 'タイプ' %>
+    <%= f.collection_select :schooltype, Schooltype.all, :schooltype, :schooltype%>
+  </div>
+
+  <div class="field">
+    <%= f.label :title, 'スクール名' %>
+    <%= f.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= f.label :body, '内容' %>
+    <%= f.text_area :body %>
+  </div>
+
+  <div class="field">
+    <%= f.label :postcode, '〒' %>
+    <%= f.text_field :postcode %>
+  </div>
+
+  <div class="field">
+    <%= f.label :address, '住所' %>
+    <%= f.text_field :address %>
+  </div>
+
+  <div class="field">
+    <%= f.label :url, 'URL' %>
+    <%= f.text_field :url %>
+  </div>
+
+  <div class="field">
+    <%= f.label :interest_list, "カテゴリ（カンマ区切り）"%><br>
+    <%= text_field_tag 'post[interest_list]', @post.interest_list.join(',') %>
+  </div>
+
+  <div class="field">
+    <%= f.label :image, 'イメージ' %>
+    <%= f.file_field :image %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
